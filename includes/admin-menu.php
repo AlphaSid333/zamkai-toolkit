@@ -11,9 +11,11 @@ private $option_name = 'zk_toolkit_settings';
 
     function __construct() {
 
+        $option_name = 'zk_toolkit_settings'; // WIthout redifining some weird issue happens, so I have declared it twice
+        
         add_action('admin_menu', array($this,'zk_toolkit_admin_menu'));
         add_action('init', [$this, 'register_settings']);
-        add_action("update_option_{$this->option_name}", [$this, 'enable_debug_settings']);
+        add_action("update_option_$option_name", [$this, 'enable_debug_settings']);
     }
 
     function zk_toolkit_admin_menu() {
