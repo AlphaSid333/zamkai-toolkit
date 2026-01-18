@@ -10,9 +10,10 @@ class zk_admin_menu{
 private $option_name = 'zk_toolkit_settings';
 
     function __construct() {
+
         add_action('admin_menu', array($this,'zk_toolkit_admin_menu'));
-        add_action('admin_init', [$this, 'register_settings']);
-        add_action('admin_init', [$this, 'enable_debug_settings']);
+        add_action('init', [$this, 'register_settings']);
+        add_action("update_option_{$this->option_name}", [$this, 'enable_debug_settings']);
     }
 
     function zk_toolkit_admin_menu() {
@@ -70,8 +71,13 @@ echo '</pre>';
  */
     public function enable_debug_settings() {
         $settings = get_option($this->option_name, []);
-        $appended_content = "This is the appended text";
-        $file = plugin_dir_path( __FILE__ ).'test.php';
+        $appended_content = "
+/** Zamkai Debug Lines, remove them if any error occurs.*/
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );";
+
+        $file = ABSPATH.'wp-config.php';
         
 
         if ( is_array($settings) && !empty($settings['debug_check']) && $settings['debug_check'] == 1 ) {
@@ -81,7 +87,7 @@ echo '</pre>';
             else {
                 file_put_contents(
                 $file,
-                $appended_content . PHP_EOL,
+                $appended_content,
                 FILE_APPEND | LOCK_EX
                 );
             }
