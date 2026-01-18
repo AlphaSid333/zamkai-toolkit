@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class zk_admin_menu{
+class ZK_toolkit_admin_menu{
 
 private $option_name = 'zk_toolkit_settings';
 
@@ -106,4 +106,3 @@ echo '</pre>';
         }
     }
 }
-new zk_admin_menu();

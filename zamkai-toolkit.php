@@ -18,3 +18,14 @@ define('ZAMKAI_TOOLKIT_PATH', plugin_dir_path(__FILE__));
 define('ZAMKAI_TOOLKIT_URL',  plugin_dir_url(__FILE__));
 
 require_once ZAMKAI_TOOLKIT_PATH . 'includes/admin-menu.php';
+require_once ZAMKAI_TOOLKIT_PATH . 'includes/debug-appender.php';
+
+class ZK_toolkit{
+
+  public function __construct(){
+    new ZK_toolkit_admin_menu();
+    new ZK_debug_appender();
+  }
+}
+
+new ZK_toolkit();
