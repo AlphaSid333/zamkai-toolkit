@@ -11,11 +11,11 @@ private $option_name = 'zk_toolkit_settings';
 
     function __construct() {
 
-        $option_name = 'zk_toolkit_settings'; // WIthout redifining some weird issue happens, so I have declared it twice
+        $option_name = 'zk_toolkit_settings'; // WIthout redifining some weird issue happens, so I have declared it t
         
         add_action('admin_menu', array($this,'zk_toolkit_admin_menu'));
-        add_action('init', [$this, 'register_settings']);
-        add_action("update_option_$option_name", [$this, 'enable_debug_settings']);
+        add_action('admin_init', [$this, 'register_settings']);
+        add_action('update_option_'.$option_name, [$this, 'enable_debug_settings']);
     }
 
     function zk_toolkit_admin_menu() {
@@ -73,14 +73,14 @@ echo '</pre>';
  */
     public function enable_debug_settings() {
         $settings = get_option($this->option_name, []);
-        $appended_content = "
-/** Zamkai Debug Lines, remove them if any error occurs.*/
-define( 'WP_DEBUG', true );
-define( 'WP_DEBUG_LOG', true );
-define( 'WP_DEBUG_DISPLAY', false );";
-
+        $start = "/* ZAMKAI DEBUG START */";
+        $end   = "/* ZAMKAI DEBUG END */";
+        $appended_content = "\n$start
+            if ( ! defined('WP_DEBUG') ) define('WP_DEBUG', true);
+            if ( ! defined('WP_DEBUG_LOG') ) define('WP_DEBUG_LOG', true);
+            if ( ! defined('WP_DEBUG_DISPLAY') ) define('WP_DEBUG_DISPLAY', false);
+            $end\n";
         $file = ABSPATH.'wp-config.php';
-        
 
         if ( is_array($settings) && !empty($settings['debug_check']) && $settings['debug_check'] == 1 ) {
             if (str_contains(file_get_contents($file), $appended_content)) {
