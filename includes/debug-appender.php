@@ -12,7 +12,12 @@ private $option_name = 'zk_toolkit_settings';
 /**
 * This appends the lines.
 */
-  private function enable_debug_settings() {
+
+    function __construct(){
+        add_action( 'update_option_' . $this->option_name, [ $this, 'enable_debug_settings' ] );
+    }
+    
+    public function enable_debug_settings() {
         $settings = get_option($this->option_name, []);
         $start = "/* ZAMKAI DEBUG START */";
         $end   = "/* ZAMKAI DEBUG END */";
@@ -35,7 +40,7 @@ private $option_name = 'zk_toolkit_settings';
                 );
             }
         }
-         if ( is_string($settings) && (empty($settings['debug_check']) || $settings['debug_check'] == 0) ){
+            if ( is_string($settings) && (empty($settings['debug_check']) || $settings['debug_check'] == 0) ){
 
             $content = file_get_contents($file);
 
