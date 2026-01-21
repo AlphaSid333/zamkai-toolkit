@@ -37,6 +37,7 @@ private $option_name = 'zk_toolkit_settings';
  * Renders the main admin page for the Zamkai Toolkit plugin.
  */
 function zk_toolkit_menu_render() {
+    settings_errors('zktoolkit_messages');
     $settings = (array)get_option( $this->option_name, []);
     ?>
     <div class="zk-menu-wrap">

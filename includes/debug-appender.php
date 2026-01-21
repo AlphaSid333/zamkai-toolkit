@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 class ZK_debug_appender{
 
 private $option_name = 'zk_toolkit_settings';
+private $message = '';
 
 /**
 * This appends the lines.
@@ -15,7 +16,6 @@ private $option_name = 'zk_toolkit_settings';
 
     function __construct(){
         add_action( 'update_option_' . $this->option_name, [ $this, 'enable_debug_settings' ] );
-        add_action('admin_notices',[ $this, 'notice_handler' ]);
     }
     
     public function enable_debug_settings() {
@@ -41,7 +41,11 @@ private $option_name = 'zk_toolkit_settings';
                         $appended_content,
                         FILE_APPEND | LOCK_EX
                         );
-                        $message = "WPCONFIG updated!";
+                        add_settings_error(
+                        'zktoolkit_messages',
+                        'zktoolkit_write_check',
+                        'Debug settings added!',
+                        'success');
                     }
                     }
                 if ( is_string($settings) && (empty($settings['debug_check']) || $settings['debug_check'] == 0) ){
@@ -52,15 +56,25 @@ private $option_name = 'zk_toolkit_settings';
                         $pattern = '/' . preg_quote($appended_content, '/') . '/';
                         $content = preg_replace($pattern, '', $content);
                         file_put_contents($file, $content, LOCK_EX);
+                        add_settings_error(
+                        'zktoolkit_messages',
+                        'zktoolkit_write_check',
+                        'Debug settings Removed!',
+                        'success');
                     }
                 }
-        } 
+        }
         else {
-            $message = "The file is NOT writable!";
+            add_settings_error(
+                        'zktoolkit_messages',
+                        'zktoolkit_write_check',
+                        'Debug settings Removed!',
+                        'success');
             }
     }
 
 function notice_handler(){
+    error_log($this->message);
     add_settings_error(
 					'zktoolkit_messages',               // Slug (can be anything)
 					'zktoolkit_write_check',          // Unique code
