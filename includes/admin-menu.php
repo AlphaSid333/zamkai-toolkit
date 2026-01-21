@@ -54,6 +54,13 @@ function zk_toolkit_menu_render() {
                                <?= checked(1, $settings['debug_check'] ?? 0, false) ?>>
                     Enable WP_DEBUG
                 </label>
+
+                <label>
+                    <input type="checkbox" id = "debug_display_check" name="<?= esc_attr($this->option_name) ?>[debug_display_check]"
+                               value="1"
+                               <?= checked(1, $settings['debug_display_check'] ?? 0, false) ?>>
+                    Enable WP_DEBUG_DISPLAY
+                </label>
                 
                 <?php submit_button('Save Settings'); ?>
             </form>
