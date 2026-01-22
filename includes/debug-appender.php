@@ -31,6 +31,7 @@ private $message = '';
                 
         if (is_writable($file)) {
             $class = "notice-error";
+
                 if ( is_array($settings) && !empty($settings['debug_check']) && $settings['debug_check'] == 1 ) {
                     if (str_contains(file_get_contents($file), $appended_content)) {
                         return;
@@ -68,8 +69,16 @@ private $message = '';
             add_settings_error(
                         'zktoolkit_messages',
                         'zktoolkit_write_check',
-                        'Debug settings Removed!',
-                        'success');
+                        'File is not writable, unable to add define debug constants!',
+                        'error');
+            $settings = (array)get_option( $this->option_name, []);
+            $settings['debug_check'] = "0";
+
+            remove_action('update_option_' . $this->option_name, [$this, 'enable_debug_settings']); // prevents infinite loop and double notice.
+
+            update_option( $this->option_name, $settings );
+
+            add_action('update_option_' . $this->option_name, [$this, 'enable_debug_settings']); //better way might be to use pre_update_option but i'm lazy ;P
             }
     }
 
