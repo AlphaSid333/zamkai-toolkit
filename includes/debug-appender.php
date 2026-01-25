@@ -49,22 +49,17 @@ private $message = '';
         if (is_writable($file)) {
             $class = "notice-error";
             if(isset($settings['debug_check']) == "1"){
-                if (str_contains(file_get_contents($file), $appended_content)){
+                if (str_contains($content, $appended_content)){
                     add_settings_error(
                             'zktoolkit_messages',
                             'zktoolkit_write_check',
                             'Debug Setting Already Active!',
                             'info');
                     }
-                    if (str_contains(file_get_contents($file), $appended_content_2)){
-                        $content = file_get_contents($file);
+                    if (str_contains($content, $appended_content_2)){
                         $pattern = '/' . preg_quote($appended_content_2, '/') . '/';
                         $content = preg_replace($pattern, '', $content);
-                        error_log($content);
-
-                        error_log("\n\n\n\n\n\n This is my $appended_content");
                         $updated_content =$content.$appended_content;
-                        error_log("\n\n\n\n\n This is the updated content $updated_content");
                         file_put_contents(
                             $file,
                             $updated_content, LOCK_EX
@@ -96,8 +91,7 @@ private $message = '';
 
                 add_action('update_option_' . $this->option_name, [$this, 'enable_debug_settings']); //better way might be to use pre_update_option but i'm lazy ;P
 
-                if (str_contains(file_get_contents($file), $appended_content)){
-                    $content = file_get_contents($file);
+                if (str_contains($content, $appended_content)){
                     $pattern = '/' . preg_quote($appended_content, '/') . '/';
                     $content = preg_replace($pattern, '', $content);
                     file_put_contents($file, $content, LOCK_EX);
@@ -107,8 +101,7 @@ private $message = '';
                         'Debug Setting Removed!',
                         'success');
                 }
-                elseif(str_contains(file_get_contents($file), $appended_content_2)){
-                        $content = file_get_contents($file);
+                elseif(str_contains($content, $appended_content_2)){
                         $pattern = '/' . preg_quote($appended_content_2, '/') . '/';
                         $content = preg_replace($pattern, '', $content);
                         file_put_contents($file, $content, LOCK_EX);
