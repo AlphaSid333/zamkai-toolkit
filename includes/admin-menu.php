@@ -12,6 +12,7 @@ private $option_name = 'zk_toolkit_settings';
     function __construct() {
         
         add_action('admin_menu', array($this,'zk_toolkit_admin_menu'));
+        add_action('admin_enqueue_scripts', [$this, 'zk_admin_scripts_load']);
         add_action('admin_init', [$this, 'register_settings']);
     }
 
@@ -24,6 +25,16 @@ private $option_name = 'zk_toolkit_settings';
             array($this,'zk_toolkit_menu_render'),
             'dashicons-admin-generic',      
             80                              
+        );
+    }
+
+    function zk_admin_scripts_load(){
+        wp_enqueue_script(
+            'ztk-admin.js',
+            plugin_dir_url(__FILE__) . "js/ztk-admin.js",
+            [],
+            '0.0.0',
+            true
         );
     }
 
@@ -55,9 +66,9 @@ function zk_toolkit_menu_render() {
                                <?= checked(1, $settings['debug_check'] ?? 0, false) ?>>
                     Enable WP_DEBUG
                 </label>
-
+            <div class = "ztk-display-checkbox" id = "zk-debug-display"style="display:none" >
                 <label>
-                    <input type="checkbox" id = "debug_display_check" name="<?= esc_attr($this->option_name) ?>[debug_display_check]"
+                    <input type="checkbox" id = "debug_display_check" name="<?= esc_attr($this->option_name)?>[debug_display_check]"
                                <?php if(isset($settings['debug_check']) && ($settings['debug_check']) == 0 ){
                                     echo 'value= 0';
                                     echo checked(1, $settings['debug_display_check'] ?? 0, false);
@@ -67,6 +78,7 @@ function zk_toolkit_menu_render() {
                                      } ?>>
                     Enable WP_DEBUG_DISPLAY
                 </label>
+            </div>
                 <?php submit_button('Save Settings'); ?>
             </form>
         </div>
