@@ -47,7 +47,6 @@ private $message = '';
         $content = file_get_contents($file);
                 
         if (is_writable($file)) {
-            $class = "notice-error";
             if(isset($settings['debug_check']) == "1"){
                 if (str_contains($content, $appended_content)){
                     add_settings_error(
@@ -131,14 +130,4 @@ private $message = '';
         add_action('update_option_' . $this->option_name, [$this, 'enable_debug_settings']); //better way might be to use pre_update_option but i'm lazy ;P
         }
     }
-
-function notice_handler(){
-    error_log($this->message);
-    add_settings_error(
-					'zktoolkit_messages',               // Slug (can be anything)
-					'zktoolkit_write_check',          // Unique code
-					$this->message, 
-					'info'                      // Type: 'success', 'error', 'warning', 'info'
-        );
-}
 }
