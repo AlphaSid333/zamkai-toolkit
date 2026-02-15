@@ -81,46 +81,15 @@ function zk_toolkit_menu_render() {
             </div>
                 <?php submit_button('Save Settings'); ?>
             </form>
-        </div><?php
-            $log_file = ABSPATH . "wp-content/debug.log";
-            
-            if ( isset($_POST['ztk_clear_log_btn']) ) {
-                $empty = "";
-                file_put_contents($log_file, $empty);
-                    add_settings_error(
-                        'zktoolkit_messages',
-                        'zktoolkit_log_clear',
-                        'Logs cleared!',
-                        'success');//not working rn
-                wp_redirect([]); 
-            }
-            if(file_exists($log_file)){
-                $logContent = file_get_contents($log_file);
-                ?>
-                <div class="ztk-log-card">
-                    <div class="ztk-title" style ="display: flex; align-items: center;" ><h3>Text File Preview</h3>
-                        <div class = "ztk-clear-log-btn" style= "padding: 0px 10px 0px 10px;">
-                            <form method="post" style="display: inline;"> <button
-                            type="submit" 
-                            name="ztk_clear_log_btn" 
-                            class="button button-primary button-large"> Clear logs</button>
-                        </form> </div>
-                </div>
-                    <p>Preview of your text file (first 50KB shown):</p>
-                    <!-- Text preview in <pre> for formatting -->
-                        <pre style="background: #f9f9f9; border: 1px solid #ddd; padding: 15px; max-height: 600px; overflow-y: auto; font-family: monospace; font-size: 12px;">
-                            <?php echo esc_html($logContent); ?>
-                        </pre>
-                </div> <?
-            }
-            else{
-                echo "Ran into an error here";
-            }
+        </div>
+        <?php
+          
+            require_once ZAMKAI_TOOLKIT_PATH . 'includes/admin parts/log-preview.php';
+            zkytLogPreview();
             
             ?>
-        </div> <?php
-        echo '<pre>Saved value: ';
-            var_dump( get_option('zk_toolkit_settings') );
-        echo '</pre>';
+        </div> 
+        
+        <?php
 }
 }
