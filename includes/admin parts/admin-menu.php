@@ -19,19 +19,29 @@ private $option_name = 'zk_toolkit_settings';
     function zk_toolkit_admin_menu() {
         add_menu_page(
             'Zamkai Toolkit', 
-            'Toolkit',                    
+            'Debug',                    
             'manage_options',
             'zamkai-toolkit', 
             array($this,'zk_toolkit_menu_render'),
             'dashicons-admin-generic',      
             80                              
         );
+
+        add_submenu_page(
+            'zamkai-toolkit',
+            'Helper plugins',
+            'Quick tools',
+            'manage_options',
+            'ztk-quick-tools',
+            array($this, 'zk_toolkit_submenu2'),
+            2
+        );
     }
 
     function zk_admin_scripts_load(){
         wp_enqueue_script(
             'ztk-admin.js',
-            plugin_dir_url(__FILE__) . "js/ztk-admin.js",
+            ZAMKAI_TOOLKIT_URL . "includes/js/ztk-admin.js",
             [],
             '0.0.0',
             true
@@ -47,6 +57,7 @@ private $option_name = 'zk_toolkit_settings';
 /**
  * Renders the main admin page for the Zamkai Toolkit plugin.
  */
+
 function zk_toolkit_menu_render() {
     settings_errors('zktoolkit_messages');
     $settings = (array)get_option( $this->option_name, []);
@@ -91,5 +102,13 @@ function zk_toolkit_menu_render() {
         </div> 
         
         <?php
+}
+
+/**
+ * Renders the sub menu quick tools page for the Zamkai Toolkit plugin.
+ */
+    
+function zk_toolkit_submenu2(){ 
+    require_once ZAMKAI_TOOLKIT_PATH . 'includes/admin parts/admin-submenu2.php';
 }
 }
