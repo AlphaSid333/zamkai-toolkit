@@ -39,13 +39,28 @@ private $option_name = 'zk_toolkit_settings';
     }
 
     function zk_admin_scripts_load(){
-        wp_enqueue_script(
-            'ztk-admin.js',
-            ZAMKAI_TOOLKIT_URL . "includes/js/ztk-admin.js",
-            [],
-            '0.0.0',
-            true
-        );
+        $screen = get_current_screen();
+        $currentPage = $screen->id;
+
+        if($currentPage == "toplevel_page_zamkai-toolkit"){
+            wp_enqueue_script(
+                'ztk-admin.js',
+                ZAMKAI_TOOLKIT_URL . "includes/js/ztk-admin.js",
+                [],
+                '0.0.0',
+                true
+            );
+        }
+
+        if($currentPage == "debug_page_ztk-quick-tools"){
+            wp_enqueue_script(
+                'ztk-admin-sub2.js',
+                ZAMKAI_TOOLKIT_URL . "includes/js/ztk-admin-sub2.js",
+                [],
+                '0.0.0',
+                true
+            );
+        }
     }
 
     function register_settings(){
