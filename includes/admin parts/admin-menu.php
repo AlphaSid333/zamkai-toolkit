@@ -109,14 +109,14 @@ function zk_toolkit_menu_render() {
             </form>
         </div>
         <?php
-          
-            require_once ZAMKAI_TOOLKIT_PATH . 'includes/admin parts/log-preview.php';
-            zkytLogPreview();
-            
-            ?>
-        </div> 
-        
-        <?php
+       ?><div id = "ztk-log-preview-wrap"> <?
+          if(isset($settings['debug_check'])){ 
+               require_once ZAMKAI_TOOLKIT_PATH . 'includes/admin parts/log-preview.php';
+                zkytLogPreview();
+          }?>
+        </div>
+    </div> 
+    <?php
 }
 
 /**

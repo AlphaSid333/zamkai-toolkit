@@ -1,7 +1,7 @@
 {
     const toggle = document.getElementById("debug_check");
     const target = document.getElementById("zk-debug-display");
-    const target2 = document.getElementById("ztk-log-preview");
+    const target2 = document.getElementById("ztk-log-preview-wrap");
 
     function updateVisibility(){
         if (toggle.checked){
