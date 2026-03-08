@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
                 <h2>WPVivid Backup</h2>
                 <p>For quick backup creation and restoration.</p>
                 <div style = "display:flex">
-                    <button class="button ztk-install-plugin-btn">Install Now</button>
+                    <button data-slug='wpvivid-backuprestore' class="button ztk-install-plugin-btn">Install Now</button>
                     <div class = "ztk-install-plugin-spn spinner"></div>
                 </div>
                 <p></p>
@@ -27,23 +27,31 @@ if (!defined('ABSPATH')) {
             <div class="card" style="min-width: 300px;">
                 <h2>WP Reset</h2>
                 <p>For complete site resets.</p>
-                <div style = "display:flex">
-                    <button class="button ztk-install-plugin-btn">Install Now</button>
-                    <div class = "ztk-install-plugin-spn spinner"></div>
-                </div>
+                    <div style = "display:flex">
+                        <button data-slug="wp-reset" class="button ztk-install-plugin-btn">Install Now</button>
+                        <div class = "ztk-install-plugin-spn spinner"></div>
+                    </div>
                 <p></p>
             </div>
 
             <div class="card" style="min-width: 300px;">
-                <h2>Email Logs</h2>
+                <h2>WP Mail Logging</h2>
                 <p>Check outgoing emails without SMTP.</p>
                 <div style = "display:flex">
-                    <button class="button ztk-install-plugin-btn">Install Now</button>
+                    <button data-slug='wp-mail-logging' class="button ztk-install-plugin-btn">Install Now</button>
                     <div class = "ztk-install-plugin-spn spinner"></div>
                 </div>
                 <p></p>
             </div>
             
-            <!-- Add more cards as needed -->
+            <div class="card" style="min-width: 300px;">
+                <h2>WP Crontrol</h2>
+                <p>Easy cron control.</p>
+                <div style = "display:flex">
+                    <button data-slug='wp-crontrol' class="button ztk-install-plugin-btn">Install Now</button>
+                    <div class = "ztk-install-plugin-spn spinner"></div>
+                </div>
+                <p></p>
+            </div>
         </div>
     </div>

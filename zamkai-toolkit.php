@@ -19,6 +19,7 @@ define('ZAMKAI_TOOLKIT_URL',  plugin_dir_url(__FILE__));
 
 require_once ZAMKAI_TOOLKIT_PATH . 'includes/admin parts/admin-menu.php';
 require_once ZAMKAI_TOOLKIT_PATH . 'includes/debug-appender.php';
+require_once ZAMKAI_TOOLKIT_PATH . 'includes/plugin-installer.php';
 
 class ZK_toolkit{
 
