@@ -108,8 +108,7 @@ function zk_toolkit_menu_render() {
                 <?php submit_button('Save Settings'); ?>
             </form>
         </div>
-        <?php
-       ?><div id = "ztk-log-preview-wrap"> <?
+        <div id = "ztk-log-preview-wrap"> <?php
           if(isset($settings['debug_check'])){ 
                require_once ZAMKAI_TOOLKIT_PATH . 'includes/admin parts/log-preview.php';
                 zkytLogPreview();

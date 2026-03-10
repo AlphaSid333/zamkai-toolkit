@@ -32,9 +32,9 @@ $log_file = ABSPATH . "wp-content/debug.log";
                 <pre style="background: #f9f9f9; border: 1px solid #ddd; padding: 15px; max-height: 600px; overflow-y: auto; font-family: monospace; font-size: 12px;">
                     <?php echo esc_html($logContent); ?>
                 </pre>
-            </div> <?
+            </div> <?php
     }
-    else{
-        echo "Ran into an error here";
+    if(!file_exists($log_file)){
+        echo "Seems the file doesn't exist, try catching a few bugs :)";
     }
 }
