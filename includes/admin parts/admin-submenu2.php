@@ -53,5 +53,25 @@ if (!defined('ABSPATH')) {
                 </div>
                 <p></p>
             </div>
+
+            <div class="card" style="min-width: 300px;">
+                <h2>File Manager</h2>
+                <p>Quick file management.</p>
+                <div style = "display:flex">
+                    <button data-slug='wp-file-manager' class="button ztk-install-plugin-btn">Install Now</button>
+                    <div class = "ztk-install-plugin-spn spinner"></div>
+                </div>
+                <p></p>
+            </div>
+
+            <div class="card" style="min-width: 300px;">
+                <h2>Adminer</h2>
+                <p>Database management.</p>
+                <div style = "display:flex">
+                    <button data-slug='pexlechris-adminer' class="button ztk-install-plugin-btn">Install Now</button>
+                    <div class = "ztk-install-plugin-spn spinner"></div>
+                </div>
+                <p></p>
+            </div>
         </div>
     </div>
