@@ -28,11 +28,13 @@ private $message = '';
             if ( ! defined('WP_DEBUG') ) define('WP_DEBUG', true);
             if ( ! defined('WP_DEBUG_LOG') ) define('WP_DEBUG_LOG', true);
             if ( ! defined('WP_DEBUG_DISPLAY') ) define('WP_DEBUG_DISPLAY', false);
+            if ( ! defined('WP_SCRIPT_DEBUG') ) define('WP_SCRIPT_DEBUG', true);
             \n$end";
         $debug_content_2 = "\n$start
             if ( ! defined('WP_DEBUG') ) define('WP_DEBUG', true);
             if ( ! defined('WP_DEBUG_LOG') ) define('WP_DEBUG_LOG', true);
             if ( ! defined('WP_DEBUG_DISPLAY') ) define('WP_DEBUG_DISPLAY', true);
+            if ( ! defined('SCRIPT_DEBUG') ) define('SCRIPT_DEBUG', true);
             \n$end";
 
         if(isset($settings['debug_display_check']) == 1){
